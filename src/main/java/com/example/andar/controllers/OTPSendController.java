@@ -27,7 +27,9 @@ public class OTPSendController {
         Map<Boolean, String> result = new HashMap<Boolean, String>();
         try {
             String email = jsonNode.get("email").asText();
-            int otp = new Random(1000).nextInt(9999);
+            int min = 1000;  
+            int max = 9999;  
+            int otp = (int)(Math.random()*(max-min+1)+min);
             session.setAttribute("otp", otp);
             return this.otpService.sendMailOTP(email, otp);
         } catch (NullPointerException e) {
